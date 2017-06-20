@@ -18,8 +18,8 @@ def run(args):
 	try:
 		dList.index(args.device)
 
-	except ValueError, e:
-		print 'Problem opening input: ',e
+	except ValueError as e:
+		print('Problem opening input: ' + e)
 		sys.exit(1)
 
 	dev = evdev.InputDevice(args.device)
