@@ -34,17 +34,10 @@ def run(args):
 			data = "%s" % ek.keycode
 			# key_down
 			if ek.keystate == 1:
-				data = data.split('_')[1]
-				if data == 'SPACE' or data == 'BACKSPACE' or data == 'TAB' or data == 'ENTER':
-					data = ' %s ' % data
-				else:
-					data = '%s' % data
-					data = data.lower()
-
-				if data == "leftctrl":
+				if data == "KEY_LEFTCTRL":
 					leftPressed = True
 
-				if data == "v" and leftPressed:
+				if data == "KEY_V" and leftPressed:
 					sys.exit(1)
 
 			if ek.keystate == 0:
