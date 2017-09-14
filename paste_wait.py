@@ -13,7 +13,6 @@ import evdev
 import argparse
 
 def run(args):
-
 	dList = evdev.list_devices()
 	try:
 		dList.index(args.device)
@@ -53,7 +52,12 @@ def main():
 	parser.add_argument('-d','--device',dest='device',required=False,action='store',help='different event device to sniff')
 	args = parser.parse_args()
 	if not args.device:
-		args.device = '/dev/input/event0'
+		devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
+		for device in devices:
+			if "keyboard" in device.name:
+				args.device = device.fn
+		if not args.device:
+			args.device = '/dev/input/event0'
 
 	run(args)
 
